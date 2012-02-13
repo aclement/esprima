@@ -3039,6 +3039,16 @@ parseStatement: true, parseSourceElement: true */
 
         var wrapTracking;
 
+        function wrapThrow(parseFunction) {
+            return function () {
+                try {
+                    return parseFunction.apply(null, arguments);
+                } catch (e) {
+                    extra.errors.push(e);
+                }
+            }
+        }
+
         if (extra.comments) {
             extra.skipComment = skipComment;
             skipComment = scanComment;
@@ -3049,7 +3059,7 @@ parseStatement: true, parseSourceElement: true */
             createLiteral = createRawLiteral;
         }
 
-        if (extra.range || extra.loc) {
+        if (extra.range || extra.loc || extra.errors) {
 
             wrapTracking = wrapTrackingFunction(extra.range, extra.loc);
 
@@ -3127,6 +3137,45 @@ parseStatement: true, parseSourceElement: true */
             parseVariableDeclaration = wrapTracking(extra.parseVariableDeclaration);
             parseVariableIdentifier = wrapTracking(extra.parseVariableIdentifier);
         }
+        
+        if (extra.errors) {
+        	parseAdditiveExpression = wrapThrow(parseAdditiveExpression);
+            parseAssignmentExpression = wrapThrow(parseAssignmentExpression);
+            parseBitwiseANDExpression = wrapThrow(parseBitwiseANDExpression);
+            parseBitwiseORExpression = wrapThrow(parseBitwiseORExpression);
+            parseBitwiseXORExpression = wrapThrow(parseBitwiseXORExpression);
+            parseBlock = wrapThrow(parseBlock);
+            parseFunctionSourceElements = wrapThrow(parseFunctionSourceElements);
+            parseCallMember = wrapThrow(parseCallMember);
+            parseCatchClause = wrapThrow(parseCatchClause);
+            parseComputedMember = wrapThrow(parseComputedMember);
+            parseConditionalExpression = wrapThrow(parseConditionalExpression);
+            parseConstLetDeclaration = wrapThrow(parseConstLetDeclaration);
+            parseEqualityExpression = wrapThrow(parseEqualityExpression);
+            parseExpression = wrapThrow(parseExpression);
+            parseForVariableDeclaration = wrapThrow(parseForVariableDeclaration);
+            parseFunctionDeclaration = wrapThrow(parseFunctionDeclaration);
+            parseFunctionExpression = wrapThrow(parseFunctionExpression);
+            parseLogicalANDExpression = wrapThrow(parseLogicalANDExpression);
+            parseLogicalORExpression = wrapThrow(parseLogicalORExpression);
+            parseMultiplicativeExpression = wrapThrow(parseMultiplicativeExpression);
+            parseNewExpression = wrapThrow(parseNewExpression);
+            parseNonComputedMember = wrapThrow(parseNonComputedMember);
+            parseNonComputedProperty = wrapThrow(parseNonComputedProperty);
+            parseObjectProperty = wrapThrow(parseObjectProperty);
+            parseObjectPropertyKey = wrapThrow(parseObjectPropertyKey);
+            parsePrimaryExpression = wrapThrow(parsePrimaryExpression);
+            parsePostfixExpression = wrapThrow(parsePostfixExpression);
+            parseProgram = wrapThrow(parseProgram);
+            parsePropertyFunction = wrapThrow(parsePropertyFunction);
+            parseRelationalExpression = wrapThrow(parseRelationalExpression);
+            parseStatement = wrapThrow(parseStatement);
+            parseShiftExpression = wrapThrow(parseShiftExpression);
+            parseSwitchCase = wrapThrow(parseSwitchCase);
+            parseUnaryExpression = wrapThrow(parseUnaryExpression);
+            parseVariableDeclaration = wrapThrow(parseVariableDeclaration);
+            parseVariableIdentifier = wrapThrow(parseVariableIdentifier);
+        }
 
         if (typeof extra.tokens !== 'undefined') {
             extra.advance = advance;
@@ -3146,7 +3195,7 @@ parseStatement: true, parseSourceElement: true */
             createLiteral = extra.createLiteral;
         }
 
-        if (extra.range || extra.loc) {
+        if (extra.range || extra.loc || extra.errors) {
             parseAdditiveExpression = extra.parseAdditiveExpression;
             parseAssignmentExpression = extra.parseAssignmentExpression;
             parseBitwiseANDExpression = extra.parseBitwiseANDExpression;
@@ -3227,6 +3276,9 @@ parseStatement: true, parseSourceElement: true */
             if (typeof options.comment === 'boolean' && options.comment) {
                 extra.comments = [];
             }
+            if (typeof options.tolerant === 'boolean' && options.tolerant) {
+                extra.errors = [];
+            }
         }
 
         if (length > 0) {
@@ -3253,6 +3305,9 @@ parseStatement: true, parseSourceElement: true */
             }
             if (typeof extra.tokens !== 'undefined') {
                 program.tokens = extra.tokens;
+            }
+            if (typeof extra.errors !== 'undefined') {
+                program.errors = extra.errors;
             }
         } catch (e) {
             throw e;
