@@ -1237,7 +1237,9 @@ parseStatement: true, parseSourceElement: true */
 
         token = lookahead();
         if (token.type !== Token.EOF && !match('}')) {        
-            rewind();
+            if (extra.errors) {
+                rewind();
+            }
             throwUnexpected(token);
         }
         return;
@@ -1527,11 +1529,35 @@ parseStatement: true, parseSourceElement: true */
 
         return args;
     }
+    
+    /**
+     * Attempt to reposition the scanner to continue processing.
+     * Example: '(foo.)' we will hit the ')' instead of discovering a property, basically rewind if we
+     * were expecting a property which will allow the next rule to succeed (and match the ')')
+     */
+    function attemptRecoveryNonComputedProperty(token) {
+      if (!extra.errors) {
+          return;
+      }
+      // token type = 7 for ) and for &&
+      if (token.value && token.type===Token.Punctuator) {
+        var idx = index-token.value.length-1;
+        while (isWhiteSpace(source[idx])) {
+          idx--;
+        }
+        if (source[idx]==='.') {
+          index = idx+1;
+          buffer=null;
+        }
+      }
+    }
+
 
     function parseNonComputedProperty() {
         var token = lex();
 
         if (!isIdentifierName(token)) {
+            attemptRecoveryNonComputedProperty(token);
             throwUnexpected(token);
         }
 
@@ -2626,11 +2652,7 @@ parseStatement: true, parseSourceElement: true */
             };
         }
         
-        try {
-            consumeSemicolon();
-        } catch (e) {
-            extra.errors.push(e);
-        }
+        consumeSemicolon();
 
 
         return {
@@ -3149,6 +3171,7 @@ parseStatement: true, parseSourceElement: true */
             extra.parseUnaryExpression = parseUnaryExpression;
             extra.parseVariableDeclaration = parseVariableDeclaration;
             extra.parseVariableIdentifier = parseVariableIdentifier;
+            extra.consumeSemicolon = consumeSemicolon;
 
             parseAdditiveExpression = wrapTracking(extra.parseAdditiveExpression);
             parseAssignmentExpression = wrapTracking(extra.parseAssignmentExpression);
@@ -3189,7 +3212,7 @@ parseStatement: true, parseSourceElement: true */
         }
         
         if (extra.errors) {
-        	parseAdditiveExpression = wrapThrow(parseAdditiveExpression);
+            parseAdditiveExpression = wrapThrow(parseAdditiveExpression);
             parseAssignmentExpression = wrapThrow(parseAssignmentExpression);
             parseBitwiseANDExpression = wrapThrow(parseBitwiseANDExpression);
             parseBitwiseORExpression = wrapThrow(parseBitwiseORExpression);
@@ -3225,6 +3248,7 @@ parseStatement: true, parseSourceElement: true */
             parseUnaryExpression = wrapThrow(parseUnaryExpression);
             parseVariableDeclaration = wrapThrow(parseVariableDeclaration);
             parseVariableIdentifier = wrapThrow(parseVariableIdentifier);
+            consumeSemicolon = wrapThrow(consumeSemicolon);
         }
 
         if (typeof extra.tokens !== 'undefined') {
@@ -3282,6 +3306,7 @@ parseStatement: true, parseSourceElement: true */
             parseUnaryExpression = extra.parseUnaryExpression;
             parseVariableDeclaration = extra.parseVariableDeclaration;
             parseVariableIdentifier = extra.parseVariableIdentifier;
+            consumeSemicolon = extra.consumeSemicolon;
         }
 
         if (typeof extra.lex === 'function') {
