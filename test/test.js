@@ -3075,6 +3075,25 @@ data = {
             }
         },
 
+        '0e+100': {
+            type: 'ExpressionStatement',
+            expression: {
+                type: 'Literal',
+                value: 0,
+                raw: '0e+100',
+                range: [0, 5],
+                loc: {
+                    start: { line: 1, column: 0 },
+                    end: { line: 1, column: 6 }
+                }
+            },
+            range: [0, 5],
+            loc: {
+                start: { line: 1, column: 0 },
+                end: { line: 1, column: 6 }
+            }
+        },
+
         '0xabc': {
             type: 'ExpressionStatement',
             expression: {
@@ -3176,6 +3195,63 @@ data = {
                 type: 'Literal',
                 value: 0X04,
                 raw: '0X04',
+                range: [0, 3],
+                loc: {
+                    start: { line: 1, column: 0 },
+                    end: { line: 1, column: 4 }
+                }
+            },
+            range: [0, 3],
+            loc: {
+                start: { line: 1, column: 0 },
+                end: { line: 1, column: 4 }
+            }
+        },
+
+        '02': {
+            type: 'ExpressionStatement',
+            expression: {
+                type: 'Literal',
+                value: 2,
+                raw: '02',
+                range: [0, 1],
+                loc: {
+                    start: { line: 1, column: 0 },
+                    end: { line: 1, column: 2 }
+                }
+            },
+            range: [0, 1],
+            loc: {
+                start: { line: 1, column: 0 },
+                end: { line: 1, column: 2 }
+            }
+        },
+
+        '012': {
+            type: 'ExpressionStatement',
+            expression: {
+                type: 'Literal',
+                value: 10,
+                raw: '012',
+                range: [0, 2],
+                loc: {
+                    start: { line: 1, column: 0 },
+                    end: { line: 1, column: 3 }
+                }
+            },
+            range: [0, 2],
+            loc: {
+                start: { line: 1, column: 0 },
+                end: { line: 1, column: 3 }
+            }
+        },
+
+        '0012': {
+            type: 'ExpressionStatement',
+            expression: {
+                type: 'Literal',
+                value: 10,
+                raw: '0012',
                 range: [0, 3],
                 loc: {
                     start: { line: 1, column: 0 },
@@ -3324,8 +3400,235 @@ data = {
                 start: { line: 1, column: 0 },
                 end: { line: 1, column: 14 }
             }
-        }
+        },
 
+        '"Hello\\\nworld"': {
+            type: 'ExpressionStatement',
+            expression: {
+                type: 'Literal',
+                value: 'Helloworld',
+                raw: '"Hello\\\nworld"',
+                range: [0, 13],
+                loc: {
+                    start: { line: 1, column: 0 },
+                    end: { line: 2, column: 14 }
+                }
+            },
+            range: [0, 13],
+            loc: {
+                start: { line: 1, column: 0 },
+                end: { line: 2, column: 14 }
+            }
+        },
+
+        '"Hello\\02World"': {
+            type: 'ExpressionStatement',
+            expression: {
+                type: 'Literal',
+                value: 'Hello\u0002World',
+                raw: '"Hello\\02World"',
+                range: [0, 14],
+                loc: {
+                    start: { line: 1, column: 0 },
+                    end: { line: 1, column: 15 }
+                }
+            },
+            range: [0, 14],
+            loc: {
+                start: { line: 1, column: 0 },
+                end: { line: 1, column: 15 }
+            }
+        },
+
+        '"Hello\\012World"': {
+            type: 'ExpressionStatement',
+            expression: {
+                type: 'Literal',
+                value: 'Hello\u000AWorld',
+                raw: '"Hello\\012World"',
+                range: [0, 15],
+                loc: {
+                    start: { line: 1, column: 0 },
+                    end: { line: 1, column: 16 }
+                }
+            },
+            range: [0, 15],
+            loc: {
+                start: { line: 1, column: 0 },
+                end: { line: 1, column: 16 }
+            }
+        },
+
+        '"Hello\\122World"': {
+            type: 'ExpressionStatement',
+            expression: {
+                type: 'Literal',
+                value: 'Hello\122World',
+                raw: '"Hello\\122World"',
+                range: [0, 15],
+                loc: {
+                    start: { line: 1, column: 0 },
+                    end: { line: 1, column: 16 }
+                }
+            },
+            range: [0, 15],
+            loc: {
+                start: { line: 1, column: 0 },
+                end: { line: 1, column: 16 }
+            }
+        },
+
+        '"Hello\\0122World"': {
+            type: 'ExpressionStatement',
+            expression: {
+                type: 'Literal',
+                value: 'Hello\u000A2World',
+                raw: '"Hello\\0122World"',
+                range: [0, 16],
+                loc: {
+                    start: { line: 1, column: 0 },
+                    end: { line: 1, column: 17 }
+                }
+            },
+            range: [0, 16],
+            loc: {
+                start: { line: 1, column: 0 },
+                end: { line: 1, column: 17 }
+            }
+        },
+
+        '"Hello\\312World"': {
+            type: 'ExpressionStatement',
+            expression: {
+                type: 'Literal',
+                value: 'Hello\u00CAWorld',
+                raw: '"Hello\\312World"',
+                range: [0, 15],
+                loc: {
+                    start: { line: 1, column: 0 },
+                    end: { line: 1, column: 16 }
+                }
+            },
+            range: [0, 15],
+            loc: {
+                start: { line: 1, column: 0 },
+                end: { line: 1, column: 16 }
+            }
+        },
+
+        '"Hello\\412World"': {
+            type: 'ExpressionStatement',
+            expression: {
+                type: 'Literal',
+                value: 'Hello\412World',
+                raw: '"Hello\\412World"',
+                range: [0, 15],
+                loc: {
+                    start: { line: 1, column: 0 },
+                    end: { line: 1, column: 16 }
+                }
+            },
+            range: [0, 15],
+            loc: {
+                start: { line: 1, column: 0 },
+                end: { line: 1, column: 16 }
+            }
+        },
+
+        '"Hello\\812World"': {
+            type: 'ExpressionStatement',
+            expression: {
+                type: 'Literal',
+                value: 'Hello812World',
+                raw: '"Hello\\812World"',
+                range: [0, 15],
+                loc: {
+                    start: { line: 1, column: 0 },
+                    end: { line: 1, column: 16 }
+                }
+            },
+            range: [0, 15],
+            loc: {
+                start: { line: 1, column: 0 },
+                end: { line: 1, column: 16 }
+            }
+        },
+
+        '"Hello\\712World"': {
+            type: 'ExpressionStatement',
+            expression: {
+                type: 'Literal',
+                value: 'Hello\712World',
+                raw: '"Hello\\712World"',
+                range: [0, 15],
+                loc: {
+                    start: { line: 1, column: 0 },
+                    end: { line: 1, column: 16 }
+                }
+            },
+            range: [0, 15],
+            loc: {
+                start: { line: 1, column: 0 },
+                end: { line: 1, column: 16 }
+            }
+        },
+
+        '"Hello\\0World"': {
+            type: 'ExpressionStatement',
+            expression: {
+                type: 'Literal',
+                value: 'Hello\u0000World',
+                raw: '"Hello\\0World"',
+                range: [0, 13],
+                loc: {
+                    start: { line: 1, column: 0 },
+                    end: { line: 1, column: 14 }
+                }
+            },
+            range: [0, 13],
+            loc: {
+                start: { line: 1, column: 0 },
+                end: { line: 1, column: 14 }
+            }
+        },
+
+        '"Hello\\\r\nworld"': {
+            type: 'ExpressionStatement',
+            expression: {
+                type: 'Literal',
+                value: 'Helloworld',
+                raw: '"Hello\\\r\nworld"',
+                range: [0, 14],
+                loc: {
+                    start: { line: 1, column: 0 },
+                    end: { line: 2, column: 15 }
+                }
+            },
+            range: [0, 14],
+            loc: {
+                start: { line: 1, column: 0 },
+                end: { line: 2, column: 15 }
+            }
+        },
+
+        '"Hello\\1World"': {
+            type: 'ExpressionStatement',
+            expression: {
+                type: 'Literal',
+                value: 'Hello\u0001World',
+                raw: '"Hello\\1World"',
+                range: [0, 13],
+                loc: {
+                    start: { line: 1, column: 0 },
+                    end: { line: 1, column: 14 }
+                }
+            },
+            range: [0, 13],
+            loc: {
+                start: { line: 1, column: 0 },
+                end: { line: 1, column: 14 }
+            }
+        }
     },
 
     'Regular Expression Literals': {
@@ -17896,6 +18199,13 @@ data = {
             index: 2,
             lineNumber: 1,
             column: 3,
+            message: 'Error: Line 1: Unexpected token ILLEGAL'
+        },
+
+        '09': {
+            index: 1,
+            lineNumber: 1,
+            column: 2,
             message: 'Error: Line 1: Unexpected token ILLEGAL'
         },
 
