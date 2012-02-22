@@ -256,6 +256,7 @@ $(document).ready(function() {
 	});
 	
 	
+	
 	/*
 	
 	temporarily removing.  This test will work if I change rewind to perform the check:
@@ -286,7 +287,21 @@ $(document).ready(function() {
 		assertErrors(parsedProgram,message(1,'Unexpected end of input'));
 		equal(stringify(parsedProgram),	"{type:IfStatement,test:{type:Literal,value:true},consequent:{type:BlockStatement,body:[{type:VariableDeclaration,declarations:[{type:VariableDeclarator,id:{type:Identifier,name:x},init:{type:Literal,value:1}}],kind:var},{type:VariableDeclaration,declarations:[{type:VariableDeclarator,id:{type:Identifier,name:y},init:{type:Literal,value:2}}],kind:var}]},alternate:null}");
 	});
-	
+		
+//	module("misc");
+//	
+//	test("test infinite loop",function() {
+//		var parsedProgram = parse("var ttt, uuu;\nttt(ttt, /**/, uuu)");
+//		assertErrors(parsedProgram,message(1,'Unexpected end of input'));
+//		equal(stringify(parsedProgram),"{:null},consequent:null,alternate:null}");	
+//	});
+//	
+//	test("test infinite loop",function() {
+//		var parsedProgram = parse("var ttt, uuu;\nttt(ttt, , uuu)");
+//		assertErrors(parsedProgram,message(1,'Unexpected end of input'));
+//		equal(stringify(parsedProgram),"{:null},consequent:null,alternate:null}");	
+//	});
+
 	
 
 });
