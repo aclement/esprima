@@ -67,6 +67,38 @@ data = {
             }]
         },
 
+        'null\n': {
+            type: 'Program',
+            body: [{
+                type: 'ExpressionStatement',
+                expression: {
+                    type: 'Literal',
+                    value: null,
+                    raw: 'null',
+                    range: [0, 3],
+                    loc: {
+                        start: { line: 1, column: 0 },
+                        end: { line: 1, column: 4 }
+                    }
+                },
+                range: [0, 4],
+                loc: {
+                    start: { line: 1, column: 0 },
+                    end: { line: 2, column: 0 }
+                }
+            }],
+            range: [0, 4],
+            loc: {
+                start: { line: 1, column: 0 },
+                end: { line: 2, column: 0 }
+            },
+            tokens: [{
+                type: 'Null',
+                value: 'null',
+                range: [0, 3]
+            }]
+        },
+
         '\n    42\n\n': {
             type: 'Program',
             body: [{
@@ -591,7 +623,116 @@ data = {
                 start: { line: 1, column: 0 },
                 end: { line: 1, column: 7 }
             }
+        },
+
+        'T\u200C = []': {
+            type: 'ExpressionStatement',
+            expression: {
+                type: 'AssignmentExpression',
+                operator: '=',
+                left: {
+                    type: 'Identifier',
+                    name: 'T\u200C',
+                    range: [0, 1],
+                    loc: {
+                        start: { line: 1, column: 0 },
+                        end: { line: 1, column: 2 }
+                    }
+                },
+                right: {
+                    type: 'ArrayExpression',
+                    elements: [],
+                    range: [5, 6],
+                    loc: {
+                        start: { line: 1, column: 5 },
+                        end: { line: 1, column: 7 }
+                    }
+                },
+                range: [0, 6],
+                loc: {
+                    start: { line: 1, column: 0 },
+                    end: { line: 1, column: 7 }
+                }
+            },
+            range: [0, 6],
+            loc: {
+                start: { line: 1, column: 0 },
+                end: { line: 1, column: 7 }
+            }
+        },
+
+        'T\u200D = []': {
+            type: 'ExpressionStatement',
+            expression: {
+                type: 'AssignmentExpression',
+                operator: '=',
+                left: {
+                    type: 'Identifier',
+                    name: 'T\u200D',
+                    range: [0, 1],
+                    loc: {
+                        start: { line: 1, column: 0 },
+                        end: { line: 1, column: 2 }
+                    }
+                },
+                right: {
+                    type: 'ArrayExpression',
+                    elements: [],
+                    range: [5, 6],
+                    loc: {
+                        start: { line: 1, column: 5 },
+                        end: { line: 1, column: 7 }
+                    }
+                },
+                range: [0, 6],
+                loc: {
+                    start: { line: 1, column: 0 },
+                    end: { line: 1, column: 7 }
+                }
+            },
+            range: [0, 6],
+            loc: {
+                start: { line: 1, column: 0 },
+                end: { line: 1, column: 7 }
+            }
+        },
+
+        '\u2163\u2161 = []': {
+            type: 'ExpressionStatement',
+            expression: {
+                type: 'AssignmentExpression',
+                operator: '=',
+                left: {
+                    type: 'Identifier',
+                    name: '\u2163\u2161',
+                    range: [0, 1],
+                    loc: {
+                        start: { line: 1, column: 0 },
+                        end: { line: 1, column: 2 }
+                    }
+                },
+                right: {
+                    type: 'ArrayExpression',
+                    elements: [],
+                    range: [5, 6],
+                    loc: {
+                        start: { line: 1, column: 5 },
+                        end: { line: 1, column: 7 }
+                    }
+                },
+                range: [0, 6],
+                loc: {
+                    start: { line: 1, column: 0 },
+                    end: { line: 1, column: 7 }
+                }
+            },
+            range: [0, 6],
+            loc: {
+                start: { line: 1, column: 0 },
+                end: { line: 1, column: 7 }
+            }
         }
+
 
     },
 
@@ -3075,6 +3216,25 @@ data = {
             }
         },
 
+        '0e+100': {
+            type: 'ExpressionStatement',
+            expression: {
+                type: 'Literal',
+                value: 0,
+                raw: '0e+100',
+                range: [0, 5],
+                loc: {
+                    start: { line: 1, column: 0 },
+                    end: { line: 1, column: 6 }
+                }
+            },
+            range: [0, 5],
+            loc: {
+                start: { line: 1, column: 0 },
+                end: { line: 1, column: 6 }
+            }
+        },
+
         '0xabc': {
             type: 'ExpressionStatement',
             expression: {
@@ -3176,6 +3336,63 @@ data = {
                 type: 'Literal',
                 value: 0X04,
                 raw: '0X04',
+                range: [0, 3],
+                loc: {
+                    start: { line: 1, column: 0 },
+                    end: { line: 1, column: 4 }
+                }
+            },
+            range: [0, 3],
+            loc: {
+                start: { line: 1, column: 0 },
+                end: { line: 1, column: 4 }
+            }
+        },
+
+        '02': {
+            type: 'ExpressionStatement',
+            expression: {
+                type: 'Literal',
+                value: 2,
+                raw: '02',
+                range: [0, 1],
+                loc: {
+                    start: { line: 1, column: 0 },
+                    end: { line: 1, column: 2 }
+                }
+            },
+            range: [0, 1],
+            loc: {
+                start: { line: 1, column: 0 },
+                end: { line: 1, column: 2 }
+            }
+        },
+
+        '012': {
+            type: 'ExpressionStatement',
+            expression: {
+                type: 'Literal',
+                value: 10,
+                raw: '012',
+                range: [0, 2],
+                loc: {
+                    start: { line: 1, column: 0 },
+                    end: { line: 1, column: 3 }
+                }
+            },
+            range: [0, 2],
+            loc: {
+                start: { line: 1, column: 0 },
+                end: { line: 1, column: 3 }
+            }
+        },
+
+        '0012': {
+            type: 'ExpressionStatement',
+            expression: {
+                type: 'Literal',
+                value: 10,
+                raw: '0012',
                 range: [0, 3],
                 loc: {
                     start: { line: 1, column: 0 },
@@ -3324,8 +3541,235 @@ data = {
                 start: { line: 1, column: 0 },
                 end: { line: 1, column: 14 }
             }
-        }
+        },
 
+        '"Hello\\\nworld"': {
+            type: 'ExpressionStatement',
+            expression: {
+                type: 'Literal',
+                value: 'Helloworld',
+                raw: '"Hello\\\nworld"',
+                range: [0, 13],
+                loc: {
+                    start: { line: 1, column: 0 },
+                    end: { line: 2, column: 14 }
+                }
+            },
+            range: [0, 13],
+            loc: {
+                start: { line: 1, column: 0 },
+                end: { line: 2, column: 14 }
+            }
+        },
+
+        '"Hello\\02World"': {
+            type: 'ExpressionStatement',
+            expression: {
+                type: 'Literal',
+                value: 'Hello\u0002World',
+                raw: '"Hello\\02World"',
+                range: [0, 14],
+                loc: {
+                    start: { line: 1, column: 0 },
+                    end: { line: 1, column: 15 }
+                }
+            },
+            range: [0, 14],
+            loc: {
+                start: { line: 1, column: 0 },
+                end: { line: 1, column: 15 }
+            }
+        },
+
+        '"Hello\\012World"': {
+            type: 'ExpressionStatement',
+            expression: {
+                type: 'Literal',
+                value: 'Hello\u000AWorld',
+                raw: '"Hello\\012World"',
+                range: [0, 15],
+                loc: {
+                    start: { line: 1, column: 0 },
+                    end: { line: 1, column: 16 }
+                }
+            },
+            range: [0, 15],
+            loc: {
+                start: { line: 1, column: 0 },
+                end: { line: 1, column: 16 }
+            }
+        },
+
+        '"Hello\\122World"': {
+            type: 'ExpressionStatement',
+            expression: {
+                type: 'Literal',
+                value: 'Hello\122World',
+                raw: '"Hello\\122World"',
+                range: [0, 15],
+                loc: {
+                    start: { line: 1, column: 0 },
+                    end: { line: 1, column: 16 }
+                }
+            },
+            range: [0, 15],
+            loc: {
+                start: { line: 1, column: 0 },
+                end: { line: 1, column: 16 }
+            }
+        },
+
+        '"Hello\\0122World"': {
+            type: 'ExpressionStatement',
+            expression: {
+                type: 'Literal',
+                value: 'Hello\u000A2World',
+                raw: '"Hello\\0122World"',
+                range: [0, 16],
+                loc: {
+                    start: { line: 1, column: 0 },
+                    end: { line: 1, column: 17 }
+                }
+            },
+            range: [0, 16],
+            loc: {
+                start: { line: 1, column: 0 },
+                end: { line: 1, column: 17 }
+            }
+        },
+
+        '"Hello\\312World"': {
+            type: 'ExpressionStatement',
+            expression: {
+                type: 'Literal',
+                value: 'Hello\u00CAWorld',
+                raw: '"Hello\\312World"',
+                range: [0, 15],
+                loc: {
+                    start: { line: 1, column: 0 },
+                    end: { line: 1, column: 16 }
+                }
+            },
+            range: [0, 15],
+            loc: {
+                start: { line: 1, column: 0 },
+                end: { line: 1, column: 16 }
+            }
+        },
+
+        '"Hello\\412World"': {
+            type: 'ExpressionStatement',
+            expression: {
+                type: 'Literal',
+                value: 'Hello\412World',
+                raw: '"Hello\\412World"',
+                range: [0, 15],
+                loc: {
+                    start: { line: 1, column: 0 },
+                    end: { line: 1, column: 16 }
+                }
+            },
+            range: [0, 15],
+            loc: {
+                start: { line: 1, column: 0 },
+                end: { line: 1, column: 16 }
+            }
+        },
+
+        '"Hello\\812World"': {
+            type: 'ExpressionStatement',
+            expression: {
+                type: 'Literal',
+                value: 'Hello812World',
+                raw: '"Hello\\812World"',
+                range: [0, 15],
+                loc: {
+                    start: { line: 1, column: 0 },
+                    end: { line: 1, column: 16 }
+                }
+            },
+            range: [0, 15],
+            loc: {
+                start: { line: 1, column: 0 },
+                end: { line: 1, column: 16 }
+            }
+        },
+
+        '"Hello\\712World"': {
+            type: 'ExpressionStatement',
+            expression: {
+                type: 'Literal',
+                value: 'Hello\712World',
+                raw: '"Hello\\712World"',
+                range: [0, 15],
+                loc: {
+                    start: { line: 1, column: 0 },
+                    end: { line: 1, column: 16 }
+                }
+            },
+            range: [0, 15],
+            loc: {
+                start: { line: 1, column: 0 },
+                end: { line: 1, column: 16 }
+            }
+        },
+
+        '"Hello\\0World"': {
+            type: 'ExpressionStatement',
+            expression: {
+                type: 'Literal',
+                value: 'Hello\u0000World',
+                raw: '"Hello\\0World"',
+                range: [0, 13],
+                loc: {
+                    start: { line: 1, column: 0 },
+                    end: { line: 1, column: 14 }
+                }
+            },
+            range: [0, 13],
+            loc: {
+                start: { line: 1, column: 0 },
+                end: { line: 1, column: 14 }
+            }
+        },
+
+        '"Hello\\\r\nworld"': {
+            type: 'ExpressionStatement',
+            expression: {
+                type: 'Literal',
+                value: 'Helloworld',
+                raw: '"Hello\\\r\nworld"',
+                range: [0, 14],
+                loc: {
+                    start: { line: 1, column: 0 },
+                    end: { line: 2, column: 15 }
+                }
+            },
+            range: [0, 14],
+            loc: {
+                start: { line: 1, column: 0 },
+                end: { line: 2, column: 15 }
+            }
+        },
+
+        '"Hello\\1World"': {
+            type: 'ExpressionStatement',
+            expression: {
+                type: 'Literal',
+                value: 'Hello\u0001World',
+                raw: '"Hello\\1World"',
+                range: [0, 13],
+                loc: {
+                    start: { line: 1, column: 0 },
+                    end: { line: 1, column: 14 }
+                }
+            },
+            range: [0, 13],
+            loc: {
+                start: { line: 1, column: 0 },
+                end: { line: 1, column: 14 }
+            }
+        }
     },
 
     'Regular Expression Literals': {
@@ -4733,6 +5177,118 @@ data = {
                 start: { line: 1, column: 0 },
                 end: { line: 1, column: 3 }
             }
+        },
+
+        'eval++': {
+            type: 'ExpressionStatement',
+            expression: {
+                type: 'UpdateExpression',
+                operator: '++',
+                argument: {
+                    type: 'Identifier',
+                    name: 'eval',
+                    range: [0, 3],
+                    loc: {
+                        start: { line: 1, column: 0 },
+                        end: { line: 1, column: 4 }
+                    }
+                },
+                prefix: false,
+                range: [0, 5],
+                loc: {
+                    start: { line: 1, column: 0 },
+                    end: { line: 1, column: 6 }
+                }
+            },
+            range: [0, 5],
+            loc: {
+                start: { line: 1, column: 0 },
+                end: { line: 1, column: 6 }
+            }
+        },
+
+        'eval--': {
+            type: 'ExpressionStatement',
+            expression: {
+                type: 'UpdateExpression',
+                operator: '--',
+                argument: {
+                    type: 'Identifier',
+                    name: 'eval',
+                    range: [0, 3],
+                    loc: {
+                        start: { line: 1, column: 0 },
+                        end: { line: 1, column: 4 }
+                    }
+                },
+                prefix: false,
+                range: [0, 5],
+                loc: {
+                    start: { line: 1, column: 0 },
+                    end: { line: 1, column: 6 }
+                }
+            },
+            range: [0, 5],
+            loc: {
+                start: { line: 1, column: 0 },
+                end: { line: 1, column: 6 }
+            }
+        },
+
+        'arguments++': {
+            type: 'ExpressionStatement',
+            expression: {
+                type: 'UpdateExpression',
+                operator: '++',
+                argument: {
+                    type: 'Identifier',
+                    name: 'arguments',
+                    range: [0, 8],
+                    loc: {
+                        start: { line: 1, column: 0 },
+                        end: { line: 1, column: 9 }
+                    }
+                },
+                prefix: false,
+                range: [0, 10],
+                loc: {
+                    start: { line: 1, column: 0 },
+                    end: { line: 1, column: 11 }
+                }
+            },
+            range: [0, 10],
+            loc: {
+                start: { line: 1, column: 0 },
+                end: { line: 1, column: 11 }
+            }
+        },
+
+        'arguments--': {
+            type: 'ExpressionStatement',
+            expression: {
+                type: 'UpdateExpression',
+                operator: '--',
+                argument: {
+                    type: 'Identifier',
+                    name: 'arguments',
+                    range: [0, 8],
+                    loc: {
+                        start: { line: 1, column: 0 },
+                        end: { line: 1, column: 9 }
+                    }
+                },
+                prefix: false,
+                range: [0, 10],
+                loc: {
+                    start: { line: 1, column: 0 },
+                    end: { line: 1, column: 11 }
+                }
+            },
+            range: [0, 10],
+            loc: {
+                start: { line: 1, column: 0 },
+                end: { line: 1, column: 11 }
+            }
         }
 
     },
@@ -4792,6 +5348,118 @@ data = {
             loc: {
                 start: { line: 1, column: 0 },
                 end: { line: 1, column: 3 }
+            }
+        },
+
+        '++eval': {
+            type: 'ExpressionStatement',
+            expression: {
+                type: 'UpdateExpression',
+                operator: '++',
+                argument: {
+                    type: 'Identifier',
+                    name: 'eval',
+                    range: [2, 5],
+                    loc: {
+                        start: { line: 1, column: 2 },
+                        end: { line: 1, column: 6 }
+                    }
+                },
+                prefix: true,
+                range: [0, 5],
+                loc: {
+                    start: { line: 1, column: 0 },
+                    end: { line: 1, column: 6 }
+                }
+            },
+            range: [0, 5],
+            loc: {
+                start: { line: 1, column: 0 },
+                end: { line: 1, column: 6 }
+            }
+        },
+
+        '--eval': {
+            type: 'ExpressionStatement',
+            expression: {
+                type: 'UpdateExpression',
+                operator: '--',
+                argument: {
+                    type: 'Identifier',
+                    name: 'eval',
+                    range: [2, 5],
+                    loc: {
+                        start: { line: 1, column: 2 },
+                        end: { line: 1, column: 6 }
+                    }
+                },
+                prefix: true,
+                range: [0, 5],
+                loc: {
+                    start: { line: 1, column: 0 },
+                    end: { line: 1, column: 6 }
+                }
+            },
+            range: [0, 5],
+            loc: {
+                start: { line: 1, column: 0 },
+                end: { line: 1, column: 6 }
+            }
+        },
+
+        '++arguments': {
+            type: 'ExpressionStatement',
+            expression: {
+                type: 'UpdateExpression',
+                operator: '++',
+                argument: {
+                    type: 'Identifier',
+                    name: 'arguments',
+                    range: [2, 10],
+                    loc: {
+                        start: { line: 1, column: 2 },
+                        end: { line: 1, column: 11 }
+                    }
+                },
+                prefix: true,
+                range: [0, 10],
+                loc: {
+                    start: { line: 1, column: 0 },
+                    end: { line: 1, column: 11 }
+                }
+            },
+            range: [0, 10],
+            loc: {
+                start: { line: 1, column: 0 },
+                end: { line: 1, column: 11 }
+            }
+        },
+
+        '--arguments': {
+            type: 'ExpressionStatement',
+            expression: {
+                type: 'UpdateExpression',
+                operator: '--',
+                argument: {
+                    type: 'Identifier',
+                    name: 'arguments',
+                    range: [2, 10],
+                    loc: {
+                        start: { line: 1, column: 2 },
+                        end: { line: 1, column: 11 }
+                    }
+                },
+                prefix: true,
+                range: [0, 10],
+                loc: {
+                    start: { line: 1, column: 0 },
+                    end: { line: 1, column: 11 }
+                }
+            },
+            range: [0, 10],
+            loc: {
+                start: { line: 1, column: 0 },
+                end: { line: 1, column: 11 }
             }
         },
 
@@ -7187,6 +7855,80 @@ data = {
             }
         },
 
+        'eval = 42': {
+            type: 'ExpressionStatement',
+            expression: {
+                type: 'AssignmentExpression',
+                operator: '=',
+                left: {
+                    type: 'Identifier',
+                    name: 'eval',
+                    range: [0, 3],
+                    loc: {
+                        start: { line: 1, column: 0 },
+                        end: { line: 1, column: 4 }
+                    }
+                },
+                right: {
+                    type: 'Literal',
+                    value: 42,
+                    raw: '42',
+                    range: [7, 8],
+                    loc: {
+                        start: { line: 1, column: 7 },
+                        end: { line: 1, column: 9 }
+                    }
+                },
+                range: [0, 8],
+                loc: {
+                    start: { line: 1, column: 0 },
+                    end: { line: 1, column: 9 }
+                }
+            },
+            range: [0, 8],
+            loc: {
+                start: { line: 1, column: 0 },
+                end: { line: 1, column: 9 }
+            }
+        },
+
+        'arguments = 42': {
+            type: 'ExpressionStatement',
+            expression: {
+                type: 'AssignmentExpression',
+                operator: '=',
+                left: {
+                    type: 'Identifier',
+                    name: 'arguments',
+                    range: [0, 8],
+                    loc: {
+                        start: { line: 1, column: 0 },
+                        end: { line: 1, column: 9 }
+                    }
+                },
+                right: {
+                    type: 'Literal',
+                    value: 42,
+                    raw: '42',
+                    range: [12, 13],
+                    loc: {
+                        start: { line: 1, column: 12 },
+                        end: { line: 1, column: 14 }
+                    }
+                },
+                range: [0, 13],
+                loc: {
+                    start: { line: 1, column: 0 },
+                    end: { line: 1, column: 14 }
+                }
+            },
+            range: [0, 13],
+            loc: {
+                start: { line: 1, column: 0 },
+                end: { line: 1, column: 14 }
+            }
+        },
+
         'x *= 42': {
             type: 'ExpressionStatement',
             expression: {
@@ -7805,6 +8547,69 @@ data = {
             loc: {
                 start: { line: 1, column: 0 },
                 end: { line: 1, column: 10 }
+            }
+        },
+
+        'var eval = 42, arguments = 42': {
+            type: 'VariableDeclaration',
+            declarations: [{
+                type: 'VariableDeclarator',
+                id: {
+                    type: 'Identifier',
+                    name: 'eval',
+                    range: [4, 7],
+                    loc: {
+                        start: { line: 1, column: 4 },
+                        end: { line: 1, column: 8 }
+                    }
+                },
+                init: {
+                    type: 'Literal',
+                    value: 42,
+                    raw: '42',
+                    range: [11, 12],
+                    loc: {
+                        start: { line: 1, column: 11 },
+                        end: { line: 1, column: 13 }
+                    }
+                },
+                range: [4, 12],
+                loc: {
+                    start: { line: 1, column: 4 },
+                    end: { line: 1, column: 13 }
+                }
+            }, {
+                type: 'VariableDeclarator',
+                id: {
+                    type: 'Identifier',
+                    name: 'arguments',
+                    range: [15, 23],
+                    loc: {
+                        start: { line: 1, column: 15 },
+                        end: { line: 1, column: 24 }
+                    }
+                },
+                init: {
+                    type: 'Literal',
+                    value: 42,
+                    raw: '42',
+                    range: [27, 28],
+                    loc: {
+                        start: { line: 1, column: 27 },
+                        end: { line: 1, column: 29 }
+                    }
+                },
+                range: [15, 28],
+                loc: {
+                    start: { line: 1, column: 15 },
+                    end: { line: 1, column: 29 }
+                }
+            }],
+            kind: 'var',
+            range: [0, 28],
+            loc: {
+                start: { line: 1, column: 0 },
+                end: { line: 1, column: 29 }
             }
         },
 
@@ -10920,6 +11725,98 @@ data = {
             }
         },
 
+        'try { } catch (eval) { }': {
+            type: 'TryStatement',
+            block: {
+                type: 'BlockStatement',
+                body: [],
+                range: [4, 6],
+                loc: {
+                    start: { line: 1, column: 4 },
+                    end: { line: 1, column: 7 }
+                }
+            },
+            handlers: [{
+                type: 'CatchClause',
+                param: {
+                    type: 'Identifier',
+                    name: 'eval',
+                    range: [15, 18],
+                    loc: {
+                        start: { line: 1, column: 15 },
+                        end: { line: 1, column: 19 }
+                    }
+                },
+                guard: null,
+                body: {
+                    type: 'BlockStatement',
+                    body: [],
+                    range: [21, 23],
+                    loc: {
+                        start: { line: 1, column: 21 },
+                        end: { line: 1, column: 24 }
+                    }
+                },
+                range: [8, 23],
+                loc: {
+                    start: { line: 1, column: 8 },
+                    end: { line: 1, column: 24 }
+                }
+            }],
+            finalizer: null,
+            range: [0, 23],
+            loc: {
+                start: { line: 1, column: 0 },
+                end: { line: 1, column: 24 }
+            }
+        },
+
+        'try { } catch (arguments) { }': {
+            type: 'TryStatement',
+            block: {
+                type: 'BlockStatement',
+                body: [],
+                range: [4, 6],
+                loc: {
+                    start: { line: 1, column: 4 },
+                    end: { line: 1, column: 7 }
+                }
+            },
+            handlers: [{
+                type: 'CatchClause',
+                param: {
+                    type: 'Identifier',
+                    name: 'arguments',
+                    range: [15, 23],
+                    loc: {
+                        start: { line: 1, column: 15 },
+                        end: { line: 1, column: 24 }
+                    }
+                },
+                guard: null,
+                body: {
+                    type: 'BlockStatement',
+                    body: [],
+                    range: [26, 28],
+                    loc: {
+                        start: { line: 1, column: 26 },
+                        end: { line: 1, column: 29 }
+                    }
+                },
+                range: [8, 28],
+                loc: {
+                    start: { line: 1, column: 8 },
+                    end: { line: 1, column: 29 }
+                }
+            }],
+            finalizer: null,
+            range: [0, 28],
+            loc: {
+                start: { line: 1, column: 0 },
+                end: { line: 1, column: 29 }
+            }
+        },
+
         'try { } catch (e) { say(e) }': {
             type: 'TryStatement',
             block: {
@@ -11379,6 +12276,133 @@ data = {
             }
         },
 
+        'function eval() { }': {
+            type: 'FunctionDeclaration',
+            id: {
+                type: 'Identifier',
+                name: 'eval',
+                range: [9, 12],
+                loc: {
+                    start: { line: 1, column: 9 },
+                    end: { line: 1, column: 13 }
+                }
+            },
+            params: [],
+            body: {
+                type: 'BlockStatement',
+                body: [],
+                range: [16, 18],
+                loc: {
+                    start: { line: 1, column: 16 },
+                    end: { line: 1, column: 19 }
+                }
+            },
+            range: [0, 18],
+            loc: {
+                start: { line: 1, column: 0 },
+                end: { line: 1, column: 19 }
+            }
+        },
+
+        'function arguments() { }': {
+            type: 'FunctionDeclaration',
+            id: {
+                type: 'Identifier',
+                name: 'arguments',
+                range: [9, 17],
+                loc: {
+                    start: { line: 1, column: 9 },
+                    end: { line: 1, column: 18 }
+                }
+            },
+            params: [],
+            body: {
+                type: 'BlockStatement',
+                body: [],
+                range: [21, 23],
+                loc: {
+                    start: { line: 1, column: 21 },
+                    end: { line: 1, column: 24 }
+                }
+            },
+            range: [0, 23],
+            loc: {
+                start: { line: 1, column: 0 },
+                end: { line: 1, column: 24 }
+            }
+        },
+
+        'function eval() { function inner() { "use strict" } }': {
+            type: 'FunctionDeclaration',
+            id: {
+                type: 'Identifier',
+                name: 'eval',
+                range: [9, 12],
+                loc: {
+                    start: { line: 1, column: 9 },
+                    end: { line: 1, column: 13 }
+                }
+            },
+            params: [],
+            body: {
+                type: 'BlockStatement',
+                body: [{
+                    type: 'FunctionDeclaration',
+                    id: {
+                        type: 'Identifier',
+                        name: 'inner',
+                        range: [27, 31],
+                        loc: {
+                            start: { line: 1, column: 27 },
+                            end: { line: 1, column: 32 }
+                        }
+                    },
+                    params: [],
+                    body: {
+                        type: 'BlockStatement',
+                        body: [{
+                            type: 'ExpressionStatement',
+                            expression: {
+                                type: 'Literal',
+                                value: 'use strict',
+                                raw: '\"use strict\"',
+                                range: [37, 48],
+                                loc: {
+                                    start: { line: 1, column: 37 },
+                                    end: { line: 1, column: 49 }
+                                }
+                            },
+                            range: [37, 49],
+                            loc: {
+                                start: { line: 1, column: 37 },
+                                end: { line: 1, column: 50 }
+                            }
+                        }],
+                        range: [35, 50],
+                        loc: {
+                            start: { line: 1, column: 35 },
+                            end: { line: 1, column: 51 }
+                        }
+                    },
+                    range: [18, 50],
+                    loc: {
+                        start: { line: 1, column: 18 },
+                        end: { line: 1, column: 51 }
+                    }
+                }],
+                range: [16, 52],
+                loc: {
+                    start: { line: 1, column: 16 },
+                    end: { line: 1, column: 53 }
+                }
+            },
+            range: [0, 52],
+            loc: {
+                start: { line: 1, column: 0 },
+                end: { line: 1, column: 53 }
+            }
+        },
+
         'function hello(a) { sayHi(); }': {
             type: 'FunctionDeclaration',
             id: {
@@ -11577,6 +12601,114 @@ data = {
             loc: {
                 start: { line: 1, column: 0 },
                 end: { line: 1, column: 32 }
+            }
+        },
+
+        'var hi = function eval() { };': {
+            type: 'VariableDeclaration',
+            declarations: [{
+                type: 'VariableDeclarator',
+                id: {
+                    type: 'Identifier',
+                    name: 'hi',
+                    range: [4, 5],
+                    loc: {
+                        start: { line: 1, column: 4 },
+                        end: { line: 1, column: 6 }
+                    }
+                },
+                init: {
+                    type: 'FunctionExpression',
+                    id: {
+                        type: 'Identifier',
+                        name: 'eval',
+                        range: [18, 21],
+                        loc: {
+                            start: { line: 1, column: 18 },
+                            end: { line: 1, column: 22 }
+                        }
+                    },
+                    params: [],
+                    body: {
+                        type: 'BlockStatement',
+                        body: [],
+                        range: [25, 27],
+                        loc: {
+                            start: { line: 1, column: 25 },
+                            end: { line: 1, column: 28 }
+                        }
+                    },
+                    range: [9, 27],
+                    loc: {
+                        start: { line: 1, column: 9 },
+                        end: { line: 1, column: 28 }
+                    }
+                },
+                range: [4, 27],
+                loc: {
+                    start: { line: 1, column: 4 },
+                    end: { line: 1, column: 28 }
+                }
+            }],
+            kind: 'var',
+            range: [0, 28],
+            loc: {
+                start: { line: 1, column: 0 },
+                end: { line: 1, column: 29 }
+            }
+        },
+
+        'var hi = function arguments() { };': {
+            type: 'VariableDeclaration',
+            declarations: [{
+                type: 'VariableDeclarator',
+                id: {
+                    type: 'Identifier',
+                    name: 'hi',
+                    range: [4, 5],
+                    loc: {
+                        start: { line: 1, column: 4 },
+                        end: { line: 1, column: 6 }
+                    }
+                },
+                init: {
+                    type: 'FunctionExpression',
+                    id: {
+                        type: 'Identifier',
+                        name: 'arguments',
+                        range: [18, 26],
+                        loc: {
+                            start: { line: 1, column: 18 },
+                            end: { line: 1, column: 27 }
+                        }
+                    },
+                    params: [],
+                    body: {
+                        type: 'BlockStatement',
+                        body: [],
+                        range: [30, 32],
+                        loc: {
+                            start: { line: 1, column: 30 },
+                            end: { line: 1, column: 33 }
+                        }
+                    },
+                    range: [9, 32],
+                    loc: {
+                        start: { line: 1, column: 9 },
+                        end: { line: 1, column: 33 }
+                    }
+                },
+                range: [4, 32],
+                loc: {
+                    start: { line: 1, column: 4 },
+                    end: { line: 1, column: 33 }
+                }
+            }],
+            kind: 'var',
+            range: [0, 33],
+            loc: {
+                start: { line: 1, column: 0 },
+                end: { line: 1, column: 34 }
             }
         },
 
@@ -17899,6 +19031,13 @@ data = {
             message: 'Error: Line 1: Unexpected token ILLEGAL'
         },
 
+        '09': {
+            index: 1,
+            lineNumber: 1,
+            column: 2,
+            message: 'Error: Line 1: Unexpected token ILLEGAL'
+        },
+
         '3in[]': {
             index: 1,
             lineNumber: 1,
@@ -18137,34 +19276,6 @@ data = {
             message: 'Error: Line 1: Illegal newline after throw'
         },
 
-        '10 = 20': {
-            index: 2,
-            lineNumber: 1,
-            column: 3,
-            message: 'Error: Line 1: Invalid left-hand side in assignment'
-        },
-
-        '10++': {
-            index: 2,
-            lineNumber: 1,
-            column: 3,
-            message: 'Error: Line 1: Invalid left-hand side expression in postfix operation'
-        },
-
-        '++10': {
-            index: 4,
-            lineNumber: 1,
-            column: 5,
-            message: 'Error: Line 1: Invalid left-hand side expression in prefix operation'
-        },
-
-        'for (10 in []);': {
-            index: 13,
-            lineNumber: 1,
-            column: 14,
-            message: 'Error: Line 1: Invalid left-hand side in for-in'
-        },
-
         'for (var i, i2 in {});': {
             index: 15,
             lineNumber: 1,
@@ -18312,6 +19423,7 @@ data = {
             message: 'Error: Line 1: Unexpected token ILLEGAL'
         },
 
+
         '\\x': {
             index: 1,
             lineNumber: 1,
@@ -18323,6 +19435,20 @@ data = {
             index: 6,
             lineNumber: 1,
             column: 7,
+            message: 'Error: Line 1: Unexpected token ILLEGAL'
+        },
+
+        '\u200C = []': {
+            index: 0,
+            lineNumber: 1,
+            column: 1,
+            message: 'Error: Line 1: Unexpected token ILLEGAL'
+        },
+
+        '\u200D = []': {
+            index: 0,
+            lineNumber: 1,
+            column: 1,
             message: 'Error: Line 1: Unexpected token ILLEGAL'
         },
 
@@ -18394,6 +19520,265 @@ data = {
             lineNumber: 1,
             column: 62,
             message: 'Error: Line 1: Object literal may not have multiple get/set accessors with the same name'
+        },
+
+        'function hello() {\'use strict\'; var eval = 10; }': {
+            index: 40,
+            lineNumber: 1,
+            column: 41,
+            message: 'Error: Line 1: Variable name may not be eval or arguments in strict mode'
+        },
+
+        'function hello() {\'use strict\'; var arguments = 10; }': {
+            index: 45,
+            lineNumber: 1,
+            column: 46,
+            message: 'Error: Line 1: Variable name may not be eval or arguments in strict mode'
+        },
+
+        'function hello() {\'use strict\'; try { } catch (eval) { } }': {
+            index: 51,
+            lineNumber: 1,
+            column: 52,
+            message: 'Error: Line 1: Catch variable may not be eval or arguments in strict mode'
+        },
+
+        'function hello() {\'use strict\'; try { } catch (arguments) { } }': {
+            index: 56,
+            lineNumber: 1,
+            column: 57,
+            message: 'Error: Line 1: Catch variable may not be eval or arguments in strict mode'
+        },
+
+        'function hello() {\'use strict\'; eval = 10; }': {
+            index: 36,
+            lineNumber: 1,
+            column: 37,
+            message: 'Error: Line 1: Assignment to eval or arguments is not allowed in strict mode'
+        },
+
+        'function hello() {\'use strict\'; arguments = 10; }': {
+            index: 41,
+            lineNumber: 1,
+            column: 42,
+            message: 'Error: Line 1: Assignment to eval or arguments is not allowed in strict mode'
+        },
+
+        'function hello() {\'use strict\'; ++eval; }': {
+            index: 38,
+            lineNumber: 1,
+            column: 39,
+            message: 'Error: Line 1: Prefix increment/decrement may not have eval or arguments operand in strict mode'
+        },
+
+        'function hello() {\'use strict\'; --eval; }': {
+            index: 38,
+            lineNumber: 1,
+            column: 39,
+            message: 'Error: Line 1: Prefix increment/decrement may not have eval or arguments operand in strict mode'
+        },
+
+        'function hello() {\'use strict\'; ++arguments; }': {
+            index: 43,
+            lineNumber: 1,
+            column: 44,
+            message: 'Error: Line 1: Prefix increment/decrement may not have eval or arguments operand in strict mode'
+        },
+
+        'function hello() {\'use strict\'; --arguments; }': {
+            index: 43,
+            lineNumber: 1,
+            column: 44,
+            message: 'Error: Line 1: Prefix increment/decrement may not have eval or arguments operand in strict mode'
+        },
+
+        'function hello() {\'use strict\'; eval++; }': {
+            index: 36,
+            lineNumber: 1,
+            column: 37,
+            message: 'Error: Line 1: Postfix increment/decrement may not have eval or arguments operand in strict mode'
+        },
+
+        'function hello() {\'use strict\'; eval--; }': {
+            index: 36,
+            lineNumber: 1,
+            column: 37,
+            message: 'Error: Line 1: Postfix increment/decrement may not have eval or arguments operand in strict mode'
+        },
+
+        'function hello() {\'use strict\'; arguments++; }': {
+            index: 41,
+            lineNumber: 1,
+            column: 42,
+            message: 'Error: Line 1: Postfix increment/decrement may not have eval or arguments operand in strict mode'
+        },
+
+        'function hello() {\'use strict\'; arguments--; }': {
+            index: 41,
+            lineNumber: 1,
+            column: 42,
+            message: 'Error: Line 1: Postfix increment/decrement may not have eval or arguments operand in strict mode'
+        },
+
+        'function hello() {\'use strict\'; function eval() { } }': {
+            index: 41,
+            lineNumber: 1,
+            column: 42,
+            message: 'Error: Line 1: Function name may not be eval or arguments in strict mode'
+        },
+
+        'function hello() {\'use strict\'; function arguments() { } }': {
+            index: 41,
+            lineNumber: 1,
+            column: 42,
+            message: 'Error: Line 1: Function name may not be eval or arguments in strict mode'
+        },
+
+        'function eval() {\'use strict\'; }': {
+            index: 9,
+            lineNumber: 1,
+            column: 10,
+            message: 'Error: Line 1: Function name may not be eval or arguments in strict mode'
+        },
+
+        'function arguments() {\'use strict\'; }': {
+            index: 9,
+            lineNumber: 1,
+            column: 10,
+            message: 'Error: Line 1: Function name may not be eval or arguments in strict mode'
+        },
+
+        'function hello() {\'use strict\'; (function eval() { }()) }': {
+            index: 42,
+            lineNumber: 1,
+            column: 43,
+            message: 'Error: Line 1: Function name may not be eval or arguments in strict mode'
+        },
+
+        'function hello() {\'use strict\'; (function arguments() { }()) }': {
+            index: 42,
+            lineNumber: 1,
+            column: 43,
+            message: 'Error: Line 1: Function name may not be eval or arguments in strict mode'
+        },
+
+        '(function eval() {\'use strict\'; })()': {
+            index: 10,
+            lineNumber: 1,
+            column: 11,
+            message: 'Error: Line 1: Function name may not be eval or arguments in strict mode'
+        },
+
+        '(function arguments() {\'use strict\'; })()': {
+            index: 10,
+            lineNumber: 1,
+            column: 11,
+            message: 'Error: Line 1: Function name may not be eval or arguments in strict mode'
+        },
+
+        'function hello() {\'use strict\'; ({ s: function eval() { } }); }': {
+            index: 47,
+            lineNumber: 1,
+            column: 48,
+            message: 'Error: Line 1: Function name may not be eval or arguments in strict mode'
+        },
+
+        'function hello() {\'use strict\'; ({ i: 10, set s(eval) { } }); }': {
+            index: 48,
+            lineNumber: 1,
+            column: 49,
+            message: 'Error: Line 1: Parameter name eval or arguments is not allowed in strict mode'
+        },
+
+        'function hello() {\'use strict\'; ({ set s(eval) { } }); }': {
+            index: 41,
+            lineNumber: 1,
+            column: 42,
+            message: 'Error: Line 1: Parameter name eval or arguments is not allowed in strict mode'
+        },
+
+        'function hello() {\'use strict\'; ({ s: function s(eval) { } }); }': {
+            index: 49,
+            lineNumber: 1,
+            column: 50,
+            message: 'Error: Line 1: Parameter name eval or arguments is not allowed in strict mode'
+        },
+
+        'function hello(eval) {\'use strict\';}': {
+            index: 15,
+            lineNumber: 1,
+            column: 16,
+            message: 'Error: Line 1: Parameter name eval or arguments is not allowed in strict mode'
+        },
+
+        'function hello(arguments) {\'use strict\';}': {
+            index: 15,
+            lineNumber: 1,
+            column: 16,
+            message: 'Error: Line 1: Parameter name eval or arguments is not allowed in strict mode'
+        },
+
+        'function hello() { \'use strict\'; function inner(eval) {} }': {
+            index: 48,
+            lineNumber: 1,
+            column: 49,
+            message: 'Error: Line 1: Parameter name eval or arguments is not allowed in strict mode'
+        },
+
+        'function hello() { \'use strict\'; function inner(arguments) {} }': {
+            index: 48,
+            lineNumber: 1,
+            column: 49,
+            message: 'Error: Line 1: Parameter name eval or arguments is not allowed in strict mode'
+        },
+
+        'function hello() { \'use strict\'; "\\1"; }': {
+            index: 33,
+            lineNumber: 1,
+            column: 34,
+            message: 'Error: Line 1: Octal literals are not allowed in strict mode.'
+        },
+
+        'function hello() { \'use strict\'; 021; }': {
+            index: 33,
+            lineNumber: 1,
+            column: 34,
+            message: 'Error: Line 1: Octal literals are not allowed in strict mode.'
+        },
+
+        'function hello() { \'use strict\'; ({ "\\1": 42 }); }': {
+            index: 36,
+            lineNumber: 1,
+            column: 37,
+            message: 'Error: Line 1: Octal literals are not allowed in strict mode.'
+        },
+
+        'function hello() { \'use strict\'; ({ 021: 42 }); }': {
+            index: 36,
+            lineNumber: 1,
+            column: 37,
+            message: 'Error: Line 1: Octal literals are not allowed in strict mode.'
+        },
+
+        'function hello() { "octal directive\\1"; "use strict"; }': {
+            index: 19,
+            lineNumber: 1,
+            column: 20,
+            message: 'Error: Line 1: Octal literals are not allowed in strict mode.'
+        },
+
+        'function hello() { "octal directive\\1"; "octal directive\\2"; "use strict"; }': {
+            index: 19,
+            lineNumber: 1,
+            column: 20,
+            message: 'Error: Line 1: Octal literals are not allowed in strict mode.'
+        },
+
+        'function hello() { "use strict"; function inner() { "octal directive\\1"; } }': {
+            index: 52,
+            lineNumber: 1,
+            column: 53,
+            message: 'Error: Line 1: Octal literals are not allowed in strict mode.'
         }
 
     }
@@ -18543,7 +19928,6 @@ function testGenerate(expected, result) {
     try {
         actual = esprima.generate(result.from, { indent: '    ' });
     } catch (e) {
-        console.log(e.stack);
         throw new NotMatchingError(expected, e.toString());
     }
     if (expected !== actual) {
