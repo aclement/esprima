@@ -16,13 +16,23 @@
 /*jslint sloppy:true browser:true */
 /*global esprima:true */
 var parseId;
+
+function format(errors) {
+  var text = "error count = "+errors.length;
+  for (var e=0; e<errors.length; e++) {
+    var error = errors[e];
+    text = text + "\n"+error;
+  }
+  return text;
+}
+
 function parse(delay) {
     if (parseId) {
         window.clearTimeout(parseId);
     }
 
     parseId = window.setTimeout(function () {
-        var code, options, result, el, str;
+        var code, options, result, el, str, tolerantChecked;
 
         // Special handling for regular expression literal since we need to
         // convert it to a string literal, otherwise it will be decoded
@@ -39,11 +49,14 @@ function parse(delay) {
         } else {
             code = window.editor.getValue();
         }
+        
+	tolerantChecked = document.getElementById('tolerant').checked;
         options = {
             comment: document.getElementById('comment').checked,
             raw: document.getElementById('raw').checked,
             range: document.getElementById('range').checked,
-            loc: document.getElementById('loc').checked
+            loc: document.getElementById('loc').checked,
+            tolerant: tolerantChecked
         };
 
         document.getElementById('tokens').value = '';
@@ -53,13 +66,16 @@ function parse(delay) {
             result = esprima.parse(code, options);
             str = JSON.stringify(result, adjustRegexLiteral, 4);
             document.getElementById('tokens').value = JSON.stringify(esprima.parse(code,
-                { tokens : true }).tokens, adjustRegexLiteral, 4);
+                { tokens : true, tolerant: tolerantChecked }).tokens, adjustRegexLiteral, 4);
         } catch (e) {
             str = e.toString();
         }
 
         el = document.getElementById('syntax');
         el.value = str;
+ 
+        el = document.getElementById('errors');
+        el.value = format(result.errors);
 
         parseId = undefined;
     }, delay || 811);
@@ -88,6 +104,7 @@ function parse(delay) {
 var answer = 6 * 7;</textarea></p>
 <p id="codemirror" align="right"><small>The above code editor is based on <a href="http://codemirror.net" target="_blank">CodeMirror</a>.</small></p>
 <p><label><input type="checkbox" id="raw"> Preserve raw value of literals</label></p>
+<p><label><input type="checkbox" id="tolerant" checked> Tolerate errors (return AST + errors) </label></p>
 <p><label><input type="checkbox" id="comment"> Include comments</label></p>
 <p>  Syntax node location info (start, end)</p>
 <div style="margin-left: 20px;">
@@ -108,6 +125,13 @@ var answer = 6 * 7;</textarea></p>
         <textarea id="tokens" rows="20" readonly></textarea>
     </div>
     </li>
+    <li id="tab_errors">
+     <h3><a id="show_errors">Errors</a></h3>
+     <div class="tab">
+        <textarea id="errors" rows="20" readonly></textarea>
+     </div>
+    </li>
+    
 </ul>
 </div>
 
@@ -141,11 +165,19 @@ window.onload = function () {
     id('show_syntax').onclick = function () {
         id('tab_syntax').className = 'active';
         id('tab_tokens').className = '';
+        id('tab_errors').className = '';
     };
 
     id('show_tokens').onclick = function () {
         id('tab_syntax').className = '';
         id('tab_tokens').className = 'active';
+        id('tab_errors').className = '';
+    };
+
+    id('show_errors').onclick = function () {
+        id('tab_syntax').className = '';
+        id('tab_tokens').className = '';
+        id('tab_errors').className = 'active';
     };
 };
 </script>
