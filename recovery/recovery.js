@@ -87,9 +87,10 @@ function stringify(parsedProgram) {
     body=body[0];
   }
   var replacer = function(key,value) {
-    if (key==='computed') {
-      return;
-    } 
+    if (key==='computed') { return; } 
+    if (key==='defaults') { return; } 
+    if (key==='rest') { return; } 
+    if (key==='generator') { return; } 
     return value;
   };
   return JSON.stringify(body,replacer).replace(/"/g,'');
@@ -135,25 +136,25 @@ $(document).ready(function() {
 	test("test 3 - dot used in function (newline then curly) - 'var foo = { ooo:8 }\\nfunction f() {\\n  foo.\\n}'",function() {
 	  var parsedProgram = parse("var foo = { ooo:8 }\nfunction f() {\n  foo.\n}");
       assertErrors(parsedProgram,message(4,'Unexpected token }'));
-      equal(stringify(parsedProgram),"[{type:VariableDeclaration,declarations:[{type:VariableDeclarator,id:{type:Identifier,name:foo},init:{type:ObjectExpression,properties:[{type:Property,key:{type:Identifier,name:ooo},value:{type:Literal,value:8},kind:init}]}}],kind:var},{type:FunctionDeclaration,id:{type:Identifier,name:f},params:[],body:{type:BlockStatement,body:[{type:ExpressionStatement,expression:{type:MemberExpression,object:{type:Identifier,name:foo},property:null}}]}}]");
+      equal(stringify(parsedProgram),"[{type:VariableDeclaration,declarations:[{type:VariableDeclarator,id:{type:Identifier,name:foo},init:{type:ObjectExpression,properties:[{type:Property,key:{type:Identifier,name:ooo},value:{type:Literal,value:8},kind:init}]}}],kind:var},{type:FunctionDeclaration,id:{type:Identifier,name:f},params:[],body:{type:BlockStatement,body:[{type:ExpressionStatement,expression:{type:MemberExpression,object:{type:Identifier,name:foo},property:null}}]},expression:false}]");
     });
     
     test("test 3a - dot used in function (no newline, just curly)- 'var ttt = { ooo:8 }\\nfunction f() {\\n  ttt.}'",function() {
 	  var parsedProgram = parse("var foo = { ttt:888 }\nfunction f() {\n  ttt.}");
       assertErrors(parsedProgram,message(4,'Unexpected token }'));
-      equal(stringify(parsedProgram),"[{type:VariableDeclaration,declarations:[{type:VariableDeclarator,id:{type:Identifier,name:foo},init:{type:ObjectExpression,properties:[{type:Property,key:{type:Identifier,name:ttt},value:{type:Literal,value:888},kind:init}]}}],kind:var},{type:FunctionDeclaration,id:{type:Identifier,name:f},params:[],body:{type:BlockStatement,body:[{type:ExpressionStatement,expression:{type:MemberExpression,object:{type:Identifier,name:ttt},property:null}}]}}]");
+      equal(stringify(parsedProgram),"[{type:VariableDeclaration,declarations:[{type:VariableDeclarator,id:{type:Identifier,name:foo},init:{type:ObjectExpression,properties:[{type:Property,key:{type:Identifier,name:ttt},value:{type:Literal,value:888},kind:init}]}}],kind:var},{type:FunctionDeclaration,id:{type:Identifier,name:f},params:[],body:{type:BlockStatement,body:[{type:ExpressionStatement,expression:{type:MemberExpression,object:{type:Identifier,name:ttt},property:null}}]},expression:false}]");
     });
     
     test("test 3b - dots 'var foo = { ooo: 888};\nfunction fff () {\\n   foo./**/}'",function() {
 	  var parsedProgram = parse("var foo = { ooo: 888};\nfunction fff () {\n   foo.\/**\/}");
       assertErrors(parsedProgram,message(4,'Unexpected token }'));
-      equal(stringify(parsedProgram),"[{type:VariableDeclaration,declarations:[{type:VariableDeclarator,id:{type:Identifier,name:foo},init:{type:ObjectExpression,properties:[{type:Property,key:{type:Identifier,name:ooo},value:{type:Literal,value:888},kind:init}]}}],kind:var},{type:FunctionDeclaration,id:{type:Identifier,name:fff},params:[],body:{type:BlockStatement,body:[{type:ExpressionStatement,expression:{type:MemberExpression,object:{type:Identifier,name:foo},property:null}}]}}]");
+      equal(stringify(parsedProgram),"[{type:VariableDeclaration,declarations:[{type:VariableDeclarator,id:{type:Identifier,name:foo},init:{type:ObjectExpression,properties:[{type:Property,key:{type:Identifier,name:ooo},value:{type:Literal,value:888},kind:init}]}}],kind:var},{type:FunctionDeclaration,id:{type:Identifier,name:fff},params:[],body:{type:BlockStatement,body:[{type:ExpressionStatement,expression:{type:MemberExpression,object:{type:Identifier,name:foo},property:null}}]},expression:false}]");
     });
     
     test("test 3c - dots 'var foo = { ooo: 888};\nfunction fff () {\\n   foo./*fooobar*/\\n}'",function() {
 	  var parsedProgram = parse("var foo = { ooo: 888};\nfunction fff () {\n   foo.\/*fooobar*\/\n}");
       assertErrors(parsedProgram,message(4,'Unexpected token }'));
-      equal(stringify(parsedProgram),"[{type:VariableDeclaration,declarations:[{type:VariableDeclarator,id:{type:Identifier,name:foo},init:{type:ObjectExpression,properties:[{type:Property,key:{type:Identifier,name:ooo},value:{type:Literal,value:888},kind:init}]}}],kind:var},{type:FunctionDeclaration,id:{type:Identifier,name:fff},params:[],body:{type:BlockStatement,body:[{type:ExpressionStatement,expression:{type:MemberExpression,object:{type:Identifier,name:foo},property:null}}]}}]");
+      equal(stringify(parsedProgram),"[{type:VariableDeclaration,declarations:[{type:VariableDeclarator,id:{type:Identifier,name:foo},init:{type:ObjectExpression,properties:[{type:Property,key:{type:Identifier,name:ooo},value:{type:Literal,value:888},kind:init}]}}],kind:var},{type:FunctionDeclaration,id:{type:Identifier,name:fff},params:[],body:{type:BlockStatement,body:[{type:ExpressionStatement,expression:{type:MemberExpression,object:{type:Identifier,name:foo},property:null}}]},expression:false}]");
     });
 	
     // Notice that node for member expression represents 'foo.var' - so it had a go at parsing that then failed, recovered to the start of the line and continued
@@ -191,7 +192,7 @@ $(document).ready(function() {
 	test("test 8 - dot followed by function - 'foo.\\nfunction f() {}\\n'",function() {
 	  var parsedProgram = parse("foo.\nfunction f() {}\n");
       assertErrors(parsedProgram,message(2,'Unexpected identifier'));
-      equal(stringify(parsedProgram),"[{type:ExpressionStatement,expression:{type:MemberExpression,object:{type:Identifier,name:foo},property:{type:Identifier,name:function}}},{type:FunctionDeclaration,id:{type:Identifier,name:f},params:[],body:{type:BlockStatement,body:[]}}]");
+      equal(stringify(parsedProgram),"[{type:ExpressionStatement,expression:{type:MemberExpression,object:{type:Identifier,name:foo},property:{type:Identifier,name:function}}},{type:FunctionDeclaration,id:{type:Identifier,name:f},params:[],body:{type:BlockStatement,body:[]},expression:false}]");
 	});
 	
 	test("test 9 - dot then whitespace before newline and var - 'foo.    \\nvar x= 4\\n'",function() {
