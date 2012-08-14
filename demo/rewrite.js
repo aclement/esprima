@@ -1,5 +1,4 @@
 /*
-  Copyright (C) 2012 Yusuke Suzuki <utatane.tea@gmail.com>
   Copyright (C) 2012 Ariya Hidayat <ariya.hidayat@gmail.com>
 
   Redistribution and use in source and binary forms, with or without
@@ -23,44 +22,50 @@
   THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-/*jslint node:true */
+/*jslint browser:true evil:true */
 
-(function () {
+function sourceRewrite() {
     'use strict';
 
-    var child = require('child_process'),
-        nodejs = '"' + process.execPath + '"',
-        ret = 0,
-        suites,
-        index;
+    var code, syntax, indent;
 
-    suites = [
-        'runner',
-        'compat'
-    ];
-
-    function nextTest() {
-        var suite = suites[index];
-
-        if (index < suites.length) {
-            child.exec(nodejs + ' ./test/' + suite + '.js', function (err, stdout, stderr) {
-                if (stdout) {
-                    process.stdout.write(suite + ': ' + stdout);
-                }
-                if (stderr) {
-                    process.stderr.write(suite + ': ' + stderr);
-                }
-                if (err) {
-                    ret = err.code;
-                }
-                index += 1;
-                nextTest();
-            });
+    function setText(id, str) {
+        var el = document.getElementById(id);
+        if (typeof el.innerText === 'string') {
+            el.innerText = str;
         } else {
-            process.exit(ret);
+            el.textContent = str;
         }
     }
 
-    index = 0;
-    nextTest();
-}());
+    setText('error', '');
+    if (typeof window.editor !== 'undefined') {
+        // Using CodeMirror.
+        code = window.editor.getValue();
+    } else {
+        // Plain textarea, likely in a situation where CodeMirror does not work.
+        code = document.getElementById('code').value;
+    }
+
+    indent = '';
+    if (document.getElementById('onetab').checked) {
+        indent = '\t';
+    } else if (document.getElementById('twospaces').checked) {
+        indent = '  ';
+    } else if (document.getElementById('fourspaces').checked) {
+        indent = '    ';
+    }
+
+    try {
+        syntax = window.esprima.parse(code, { raw: true });
+        code = window.escodegen.generate(syntax, { indent: indent });
+    } catch (e) {
+        setText('error', e.toString());
+    } finally {
+        if (typeof window.editor !== 'undefined') {
+            window.editor.setValue(code);
+        } else {
+            document.getElementById('code').value = code;
+        }
+    }
+}

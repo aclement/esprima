@@ -28,6 +28,10 @@ class RegExpGenerator(object):
     r = [ ch for ch in range(0x0080, 0xFFFF + 1) if self.detector.is_identifier_part(ch)]
     return self._generate_range(r)
 
+  def generate_non_ascii_separator_space(self):
+    r = [ ch for ch in range(0x0080, 0xFFFF + 1) if self.detector.is_separator_space(ch)]
+    return self._generate_range(r)
+
   def _generate_range(self, r):
     if len(r) == 0:
       return '[]'
@@ -46,6 +50,8 @@ class RegExpGenerator(object):
       else:
         if start == end:
           buf.append("\\u%04X" % start)
+        elif end == start + 1:
+          buf.append("\\u%04X\\u%04X" % (start, end))
         else:
           buf.append("\\u%04X-\\u%04X" % (start, end))
         start = code
@@ -150,8 +156,9 @@ def analyze(source):
 
 def main(source):
   generator = analyze(source)
-  print '/' + generator.generate_non_ascii_identifier_start() + '/'
-  print '/' + generator.generate_non_ascii_identifier_part() + '/'
+  print generator.generate_non_ascii_identifier_start()
+  print generator.generate_non_ascii_identifier_part()
+  print generator.generate_non_ascii_separator_space()
 
 if __name__ == '__main__':
   main(sys.argv[1])

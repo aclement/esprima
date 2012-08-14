@@ -2,15 +2,29 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Esprima: Regex Collector Demo</title>
+<title>Esprima: Identifier Highlight</title>
 <script src="../test/3rdparty/platform.js"></script>
 <script src="checkenv.js"></script>
-<script src="collector.js"></script>
+<script src="highlight.js"></script>
 <script src="../esprima.js"></script>
 <script src="../assets/codemirror/codemirror.js"></script>
 <script src="../assets/codemirror/javascript.js"></script>
 <link rel="stylesheet" type="text/css" href="../assets/codemirror/codemirror.css"/>
 <link rel="stylesheet" type="text/css" href="../assets/style.css"/>
+<style>
+.CodeMirror-scroll {
+    height: 300px;
+}
+.identifier {
+    background-color: #ffffcc;
+    border: 1px solid #ffcc99;
+    margin: -1px;
+    border-radius: 4px;
+}
+.highlight {
+    background-color: #ffffcc;
+}
+</style>
 </head>
 <body>
 <div class="container">
@@ -24,28 +38,30 @@
 </ul>
 </div>
 
-<h1>Regular Expression Collector <small>uncovers all your secrets</small></h1>
+<h1>Identifier Highlight <small>to spot everything</small></h1>
 
-<p><strong>Note</strong>: Only regular expression literals and objects created with <code>RegExp</code> are considered.</p>
-<p>Type ECMAScript code:</p>
-    <p><textarea id="code" autofocus="autofocus" cols="70" rows="15" spellcheck="false">
-var letterRE = new RegExp('[a-zA-Z]', 'g'),
-    digitRE = RegExp('[0-9]');
+<p>Type ECMAScript code and place the cursor in an identifier.<br>
+<strong>Note</strong>: Scope is not handled properly yet, see <a href="http://code.google.com/p/esprima/issues/detail?id=98">issue 98</a>.</p>
 
+<p><textarea id="code" autofocus="autofocus" cols="70" rows="25" spellcheck="false">
+// Array shuffling code from Underscore.js.
 
-// This is from json2.js.
-
-if (/^[\],:{}\s]*$/.test(text.replace(/\\(?:["\\\/bfnrt]|u[0-9a-fA-F]{4})/g, '@')
-    .replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']')
-    .replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
-}
+_.shuffle = function(obj) {
+    var shuffled = [], rand;
+    each(obj, function(value, index, list) {
+        rand = Math.floor(Math.random() * (index + 1));
+        shuffled[index] = shuffled[rand];
+        shuffled[rand] = value;
+    });
+    return shuffled;
+};
 </textarea></p>
+
 <p id="codemirror" align="right"><small>The above code editor is based on <a href="http://codemirror.net" target="_blank">CodeMirror</a>.</small></p>
 
-<p>Using Esprima version <span id="version"></span>.</p>
+<p id="error"></p>
 
-<div id="result">
-</div>
+<p style="margin-top: 50px;">Using Esprima version <span id="version"></span>.</p>
 
 <div class="footer"><strong>Esprima</strong> is created by
 <a href="http://ariya.ofilabs.com/about" target="_blank">Ariya Hidayat</a>. Follow <a href="http://twitter.com/ariyahidayat">@ariyahidayat</a> on Twitter.
@@ -55,28 +71,24 @@ if (/^[\],:{}\s]*$/.test(text.replace(/\\(?:["\\\/bfnrt]|u[0-9a-fA-F]{4})/g, '@'
 </div>
 <script>
 /*jslint sloppy:true browser:true */
-/*global collectRegex:true, CodeMirror:true */
-window.onload = collectRegex;
+/*global trackCursor: true, triggerParse: true, CodeMirror:true */
+window.onload = function () {
+    var el;
 
-try {
-    window.checkEnv();
-
-    // This is just testing, to detect whether CodeMirror would fail or not
-    window.editor = CodeMirror.fromTextArea(document.getElementById("test"));
+    el = document.getElementById('version');
+    if (typeof el.innerText === 'string') {
+        el.innerText = window.esprima.version;
+    } else {
+        el.textContent = window.esprima.version;
+    }
 
     window.editor = CodeMirror.fromTextArea(document.getElementById("code"), {
         lineNumbers: true,
         matchBrackets: true,
-        onChange: collectRegex
+        onCursorActivity: trackCursor,
+        onChange: triggerParse
     });
-} catch (e) {
-    // CodeMirror failed to initialize, possible in e.g. old IE.
-    document.getElementById('codemirror').innerHTML = '';
-    document.getElementById('code').onchange = collectRegex;
-    document.getElementById('code').onkeydown = collectRegex;
-} finally {
-    document.getElementById('testbox').parentNode.removeChild(document.getElementById('testbox'));
-}
+};
 </script>
 </body>
 </html>
